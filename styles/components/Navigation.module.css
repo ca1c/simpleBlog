@@ -1,0 +1,13 @@
+.navigation {
+    background-color: #34a8eb;
+    padding: 1rem;
+    color: #ebf1f5;
+    text-decoration: underline;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.navigation a:hover {
+    color: #d8e8f2;
+}
