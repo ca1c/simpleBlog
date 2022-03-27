@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import styles from '../styles/login.module.css';
+import { useState } from 'react'
+import styles from '../styles/login.module.css'
 
 import Head from 'next/head'
-import TextInput from '../components/textInput.component';
 
 export default function Login() {
     const [loginDetails, setLoginDetails] = useState({username: "", password: ""});
@@ -27,14 +26,12 @@ export default function Login() {
                 <title>SimpleBlog - Login</title>
             </Head>
             <div className={styles.container}>
-                <h1>Login</h1>
-                <div className={styles.container}>
-                    <label>Username:</label>
-                    <input type="text" onChange={handleUsernameChange} />
-                    <label>Password:</label>
-                    <input type="password" onChange={handlePasswordChange} />
-                    <button onClick={SubmitLogin}>Login</button>
-                </div>
+                <h1 className={styles.subheading}>Login</h1>
+                <label>Username:</label>
+                <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange} />
+                <label>Password:</label>
+                <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
+                <button className={styles.button} onClick={SubmitLogin}>Login</button>
             </div>
         </>
     );
