@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from '../styles/login.module.css'
+import axios from 'axios';
 
 import Head from 'next/head'
 
@@ -17,7 +18,13 @@ export default function Login() {
     }
 
     function SubmitLogin() {
-        console.log(loginDetails);
+        axios.post('http://localhost:8080/login', loginDetails)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     return (
@@ -25,13 +32,15 @@ export default function Login() {
             <Head>
                 <title>SimpleBlog - Login</title>
             </Head>
-            <div className={styles.container}>
-                <h1 className={styles.subheading}>Login</h1>
-                <label>Username:</label>
-                <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange} />
-                <label>Password:</label>
-                <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
-                <button className={styles.button} onClick={SubmitLogin}>Login</button>
+            <div className={styles.outerContainer}>
+                <div className={styles.container}>
+                    <h1 className={styles.subheading}>Login</h1>
+                    <label>Username:</label>
+                    <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange} />
+                    <label>Password:</label>
+                    <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
+                    <button className={styles.button} onClick={SubmitLogin}>Login</button>
+                </div>
             </div>
         </>
     );
