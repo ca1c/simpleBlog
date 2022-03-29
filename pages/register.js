@@ -43,7 +43,7 @@ export default function Register() {
                 <label>Email:</label>
                 <input type="text" placeholder="example@gmail.com" className={styles.input} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input type="text" placeholder="password" className={styles.input} onChange={handlePasswordChange}/>
+                <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange}/>
                 <button className={styles.button} onClick={submitRegistry}>Register</button>
             </div>
         </>
