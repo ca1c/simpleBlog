@@ -6,7 +6,7 @@ import Head from 'next/head'
 
 export default function Register() {
 
-    [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
+    const [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
 
     function handleUsernameChange(e) {
         var value = e.target.value;

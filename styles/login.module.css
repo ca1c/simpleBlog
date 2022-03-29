@@ -19,7 +19,7 @@
     flex-direction: column;
     gap: 10px;
     margin: 0 auto;
-    
+    max-width: 200px;
 }
 .input {
     border-radius: 5px;
