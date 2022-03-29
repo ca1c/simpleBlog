@@ -5,6 +5,32 @@ import axios from 'axios';
 import Head from 'next/head'
 
 export default function Register() {
+
+    [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
+
+    function handleUsernameChange(e) {
+        var value = e.target.value;
+        setRegistryDetails({username: value, email: registryDetails.email, password: registryDetails.password})
+    }
+    function handleEmailChange(e) {
+        var value = e.target.value;
+        setRegistryDetails({username: registryDetails.username, email: value, password: registryDetails.password})
+    }
+    function handlePasswordChange(e) {
+        var value = e.target.value;
+        setRegistryDetails({username: registryDetails.username, email: registryDetails.email, password: value})
+    }
+
+    function submitRegistry() {
+        axios.post('http://localhost:8080/api/register', registryDetails)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     return (
         <>
             <Head>
@@ -13,12 +39,12 @@ export default function Register() {
             <div className={styles.container}>
                 <h1 className={styles.subheading}>Register</h1>
                 <label>Username:</label>
-                <input type="text" placeholder="username" className={styles.input} />
+                <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange}/>
                 <label>Email:</label>
-                <input type="text" placeholder="example@gmail.com" className={styles.input} />
+                <input type="text" placeholder="example@gmail.com" className={styles.input} onChange={handleEmailChange}/>
                 <label>Password:</label>
-                <input type="text" placeholder="password" className={styles.input} />
-                <button className={styles.button}>Register</button>
+                <input type="text" placeholder="password" className={styles.input} onChange={handlePasswordChange}/>
+                <button className={styles.button} onClick={submitRegistry}>Register</button>
             </div>
         </>
     )

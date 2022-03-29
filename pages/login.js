@@ -18,7 +18,7 @@ export default function Login() {
     }
 
     function SubmitLogin() {
-        axios.post('http://localhost:8080/login', loginDetails)
+        axios.post('http://localhost:8080/api/login', loginDetails)
             .then((res) => {
                 console.log(res);
             })
