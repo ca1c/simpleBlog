@@ -38,6 +38,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navigation>
+        <Link href="/">Home</Link>
         <Link href="/login">Login</Link>
         <Link href="/register">Register</Link>
       </Navigation>

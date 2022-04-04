@@ -2,6 +2,8 @@ import { useState } from 'react'
 import styles from '../styles/login.module.css'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import Navigation from '../components/navigation.component';
+import Link from 'next/Link';
 
 import Head from 'next/head'
 
@@ -34,6 +36,11 @@ export default function Login() {
             <Head>
                 <title>SimpleBlog - Login</title>
             </Head>
+            <Navigation>
+                <Link href="/">Home</Link>
+                <Link href="/login">Login</Link>
+                <Link href="/register">Register</Link>
+            </Navigation>
             <div className={styles.outerContainer}>
                 <div className={styles.container}>
                     <h1 className={styles.subheading}>Login</h1>
