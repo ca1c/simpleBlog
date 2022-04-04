@@ -29,6 +29,14 @@ export default function Register() {
             .catch((err) => {
                 console.log(err);
             })
+
+        axios.get('http://localhost:8080/api/userSession')
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
     return (

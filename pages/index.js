@@ -3,8 +3,10 @@ import Image from 'next/image'
 import Link from 'next/Link'
 import styles from '../styles/Home.module.css'
 import Navigation from '../components/navigation.component';
+import axios from 'axios';
 
 export default function Home() {
+
   return (
     <>
       <Head>

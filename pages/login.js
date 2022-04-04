@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from '../styles/login.module.css'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 import Head from 'next/head'
 
@@ -20,7 +21,8 @@ export default function Login() {
     function SubmitLogin() {
         axios.post('http://localhost:8080/api/login', loginDetails)
             .then((res) => {
-                console.log(res);
+                const cookies = new Cookies();
+                cookies.set('sessID', res.data.sessID);
             })
             .catch((err) => {
                 console.log(err);
