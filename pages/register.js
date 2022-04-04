@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from '../styles/login.module.css'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 import Head from 'next/head'
 
@@ -24,15 +25,8 @@ export default function Register() {
     function submitRegistry() {
         axios.post('http://localhost:8080/api/register', registryDetails)
             .then((res) => {
-                console.log(res);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-
-        axios.get('http://localhost:8080/api/userSession')
-            .then((res) => {
-                console.log(res);
+                const cookies = new Cookies();
+                cookies.set('sessID', res.data.sessID, { SameSite: true });
             })
             .catch((err) => {
                 console.log(err);
