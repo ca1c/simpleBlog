@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router';
 import styles from '../styles/login.module.css'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import redirect from 'nextjs-redirect';
 import Navigation from '../components/navigation.component';
 import Link from 'next/Link';
 
@@ -9,6 +11,7 @@ import Head from 'next/head'
 
 export default function Login() {
     const [loginDetails, setLoginDetails] = useState({username: "", password: ""});
+    const router = useRouter();
 
     function handleUsernameChange(e) {
         var value = e.target.value;
@@ -25,6 +28,7 @@ export default function Login() {
             .then((res) => {
                 const cookies = new Cookies();
                 cookies.set('sessID', res.data.sessID);
+                router.push('/');
             })
             .catch((err) => {
                 console.log(err);

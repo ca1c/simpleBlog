@@ -1,15 +1,19 @@
-import { useState } from 'react'
-import styles from '../styles/login.module.css'
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import styles from '../styles/login.module.css';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import redirect from 'nextjs-redirect';
 import Navigation from '../components/navigation.component';
 import Link from 'next/Link';
+
 
 import Head from 'next/head'
 
 export default function Register() {
 
     const [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
+    const router = useRouter();
 
     function handleUsernameChange(e) {
         var value = e.target.value;
@@ -29,6 +33,7 @@ export default function Register() {
             .then((res) => {
                 const cookies = new Cookies();
                 cookies.set('sessID', res.data.sessID, { SameSite: true });
+                router.push('/');
             })
             .catch((err) => {
                 console.log(err);
