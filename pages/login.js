@@ -5,6 +5,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import redirect from 'nextjs-redirect';
 import Navigation from '../components/navigation.component';
+import Error from '../components/error.component';
 import Link from 'next/Link';
 
 import Head from 'next/head'
@@ -53,6 +54,7 @@ export default function Login() {
                     <label>Password:</label>
                     <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
                     <button className={styles.button} onClick={SubmitLogin}>Login</button>
+                    <Error visible={true} message="Username or password incorrect"/>
                 </div>
             </div>
         </>
