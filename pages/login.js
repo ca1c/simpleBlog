@@ -12,6 +12,8 @@ import Head from 'next/head'
 
 export default function Login() {
     const [loginDetails, setLoginDetails] = useState({username: "", password: ""});
+    const [errorMessage, setErrorMessage] = useState("");
+    const [errorVisible, setErrorVisible] = useState(false);
     const router = useRouter();
 
     function handleUsernameChange(e) {
@@ -27,13 +29,23 @@ export default function Login() {
     function SubmitLogin() {
         axios.post('http://localhost:8080/api/login', loginDetails)
             .then((res) => {
-                const cookies = new Cookies();
-                cookies.set('sessID', res.data.sessID);
-                router.push('/');
+                if(res.data.success) {
+                    const cookies = new Cookies();
+                    cookies.set('sessID', res.data.sessID);
+                    router.push('/');
+                }
+                else {
+                    setErrorMessage(res.data.message);
+                    setErrorVisible(true);
+                }
             })
             .catch((err) => {
                 console.log(err);
             })
+    }
+
+    function closeError() {
+        setErrorVisible(false);
     }
 
     return (
@@ -54,7 +66,12 @@ export default function Login() {
                     <label>Password:</label>
                     <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
                     <button className={styles.button} onClick={SubmitLogin}>Login</button>
-                    <Error visible={true} message="Username or password incorrect"/>
+                    {
+                        errorVisible ?
+                        <Error close={closeError} message={errorMessage}/>
+                        :
+                        <div></div>
+                    }
                 </div>
             </div>
         </>

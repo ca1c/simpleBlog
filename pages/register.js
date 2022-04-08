@@ -5,6 +5,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import redirect from 'nextjs-redirect';
 import Navigation from '../components/navigation.component';
+import Error from '../components/error.component';
 import Link from 'next/Link';
 
 
@@ -13,6 +14,8 @@ import Head from 'next/head'
 export default function Register() {
 
     const [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
+    const [errorMessage, setErrorMessage] = useState("");
+    const [errorVisible, setErrorVisible] = useState(false);
     const router = useRouter();
 
     function handleUsernameChange(e) {
@@ -31,13 +34,25 @@ export default function Register() {
     function submitRegistry() {
         axios.post('http://localhost:8080/api/register', registryDetails)
             .then((res) => {
-                const cookies = new Cookies();
-                cookies.set('sessID', res.data.sessID, { SameSite: true });
-                router.push('/');
+                console.log(res.data);
+                if(res.data.success) {
+                    const cookies = new Cookies();
+                    cookies.set('sessID', res.data.sessID, { SameSite: true });
+                    router.push('/');
+                }
+                else {
+                    console.log('ran');
+                    setErrorMessage(res.data.message);
+                    setErrorVisible(true);
+                }
             })
             .catch((err) => {
                 console.log(err);
             })
+    }
+
+    function closeError() {
+        setErrorVisible(false);
     }
 
     return (
@@ -59,6 +74,12 @@ export default function Register() {
                 <label>Password:</label>
                 <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange}/>
                 <button className={styles.button} onClick={submitRegistry}>Register</button>
+                {
+                    errorVisible ?
+                    <Error close={closeError} message={errorMessage}/>
+                    :
+                    <div></div>
+                }
             </div>
         </>
     )

@@ -1,24 +1,14 @@
 import styles from '../styles/components/Error.module.css';
 import { useState } from 'react';
 
-export default function Error({visible, message}) {
-    const [stateVisible, setStateVisible] = useState(visible);
-    
-    function toggleVisible() {
-        setStateVisible(stateVisible ? false : true);
-    }
+export default function Error({close, message}) {
 
     return (
         <>
-            {stateVisible ?
-                <div className={styles.error}>
-                    {message}
-                    <button onClick={toggleVisible} className={styles.errorButton}>close</button>
-                </div>
-                
-                     :
-                <div></div>
-            }   
+            <div className={styles.error}>
+                {message}
+                <button onClick={close} className={styles.errorButton}>close</button>
+            </div>
         </>
     )
 }
