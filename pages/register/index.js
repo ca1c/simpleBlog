@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/login.module.css';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import Link from 'next/Link';
 
 
 import Head from 'next/head'
+import AuthenticateUser from '../../util/authenticate';
 
 export default function Register() {
 
@@ -54,6 +55,15 @@ export default function Register() {
     function closeError() {
         setErrorVisible(false);
     }
+
+    useEffect(() => {
+        AuthenticateUser.then((username) => {
+            router.push('/');
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    },[])
 
     return (
         <>

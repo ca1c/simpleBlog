@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import styles from '../../styles/login.module.css'
 import axios from 'axios';
@@ -7,6 +7,7 @@ import redirect from 'nextjs-redirect';
 import Navigation from '../../components/navigation.component';
 import Error from '../../components/error.component';
 import Link from 'next/Link';
+import AuthenticateUser from '../../util/authenticate';
 
 import Head from 'next/head'
 
@@ -47,6 +48,14 @@ export default function Login() {
     function closeError() {
         setErrorVisible(false);
     }
+
+    useEffect(() => {
+        AuthenticateUser.then((username) => {
+            router.push('/');
+        }).catch((err) => {
+            console.log(err);
+        })
+    },[])
 
     return (
         <>
