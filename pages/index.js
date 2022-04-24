@@ -6,28 +6,21 @@ import Navigation from '../components/navigation.component';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
+import AuthenticateUser from '../util/authenticate';
 
 export default function Home() {
 
   const [userData, setUserData] = useState({ username: "" });
   const [authenticated, setAuthenticated] = useState(false);
 
-  async function AuthenticateUser() {
-    try {
-      const cookies = new Cookies();
-      const sessID = cookies.get("sessID");
-      const query = `?sessId=${sessID}`;
-      const res = await axios.get(`http://localhost:8080/api/authenticate${query}`);
-      console.log(res.data);
-      setUserData({ username: res.data.username });
-      setAuthenticated(true);
-    } catch(error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
-    AuthenticateUser();
+    AuthenticateUser.then((username) => {
+      setUserData({ username: username });
+      setAuthenticated(true);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }, [])
 
   return (

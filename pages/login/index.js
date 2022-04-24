@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router';
-import styles from '../styles/login.module.css'
+import styles from '../../styles/login.module.css'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import redirect from 'nextjs-redirect';
-import Navigation from '../components/navigation.component';
-import Error from '../components/error.component';
+import Navigation from '../../components/navigation.component';
+import Error from '../../components/error.component';
 import Link from 'next/Link';
 
 import Head from 'next/head'
