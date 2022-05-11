@@ -34,6 +34,12 @@ export default function Home() {
         <Link href="/">Home</Link>
         <Link href="/login">Login</Link>
         <Link href="/register">Register</Link>
+        {
+          authenticated ?    
+          <Link href="/logout">Log Out</Link>
+          :
+          <div></div>
+        }
       </Navigation>
       <div className={styles.header}>
         <h1 className={styles.heading}>SimpleBlog</h1>
