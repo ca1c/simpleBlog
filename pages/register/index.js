@@ -17,6 +17,7 @@ export default function Register() {
     const [registryDetails, setRegistryDetails] = useState({username: "", email: "", password: ""})
     const [errorMessage, setErrorMessage] = useState("");
     const [errorVisible, setErrorVisible] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
     const router = useRouter();
 
     function handleUsernameChange(e) {
@@ -58,7 +59,8 @@ export default function Register() {
 
     useEffect(() => {
         AuthenticateUser.then((username) => {
-            router.push('/');
+            setUserData({ username: username });
+            setAuthenticated(true);
         })
         .catch((err) => {
             console.log(err);
@@ -70,26 +72,33 @@ export default function Register() {
             <Head>
                 <title>SimpleBlog - Register</title>
             </Head>
-            <Navigation>
-                <Link href="/">Home</Link>
-                <Link href="/login">Login</Link>
-                <Link href="/register">Register</Link>
-            </Navigation>
+            <Navigation authenticated={authenticated}/>
+            <div className={styles.box}>
+                <div className="container-fluid">
+                    <div className="mb-3">
+                        <h2>Register</h2>
+                        <label className="form-label">Username:</label>
+                        <input type="text" placeholder="username" className="form-control" onChange={handleUsernameChange}/>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Email:</label>
+                        <input type="text" placeholder="example@gmail.com" className="form-control" onChange={handleEmailChange}/>
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Password:</label>
+                        <input type="password" placeholder="password" className="form-control" onChange={handlePasswordChange}/>
+                    </div>
+                    <button className="btn btn-primary" onClick={submitRegistry}>Register</button>
+                    {
+                        errorVisible ?
+                        <Error close={closeError} message={errorMessage}/>
+                        :
+                        <div></div>
+                    }
+                </div>
+            </div>
             <div className={styles.container}>
-                <h1 className={styles.subheading}>Register</h1>
-                <label>Username:</label>
-                <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange}/>
-                <label>Email:</label>
-                <input type="text" placeholder="example@gmail.com" className={styles.input} onChange={handleEmailChange}/>
-                <label>Password:</label>
-                <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange}/>
-                <button className={styles.button} onClick={submitRegistry}>Register</button>
-                {
-                    errorVisible ?
-                    <Error close={closeError} message={errorMessage}/>
-                    :
-                    <div></div>
-                }
+
             </div>
         </>
     )

@@ -14,12 +14,12 @@
     width: 100%;
 }
 
-.container {
+.box {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
     margin: 0 auto;
-    max-width: 200px;
+    max-width: 300px;
+    min-height: 60vh;
 }
 .input {
     border-radius: 5px;

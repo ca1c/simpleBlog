@@ -28,23 +28,17 @@ export default function Home() {
       <Head>
         <title>SimpleBlog - Home</title>
         <meta name="description" content="Create your space." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navigation>
-        <Link href="/">Home</Link>
-        <Link href="/login">Login</Link>
-        <Link href="/register">Register</Link>
-        {
-          authenticated ?    
-          <Link href="/logout">Log Out</Link>
-          :
-          <div></div>
-        }
-      </Navigation>
-      <div className={styles.header}>
-        <h1 className={styles.heading}>SimpleBlog</h1>
-        <h1 className={styles.subheading}>Create your space.</h1>
-        <p>username: {userData.username}</p>
+      <Navigation authenticated={authenticated} />
+      <div className={styles.hero}>
+        <div className="container-fluid">
+          <div className={styles.header}>
+            <h1 className={styles.heading}>SimpleBlog</h1>
+            <h1 className={styles.subheading}>Create your space.</h1>
+          </div>
+        </div>
       </div>
       <div className={styles.main}>
         <div className={styles.container}>

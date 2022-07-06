@@ -15,6 +15,7 @@ export default function Login() {
     const [loginDetails, setLoginDetails] = useState({username: "", password: ""});
     const [errorMessage, setErrorMessage] = useState("");
     const [errorVisible, setErrorVisible] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
     const router = useRouter();
 
     function handleUsernameChange(e) {
@@ -51,8 +52,10 @@ export default function Login() {
 
     useEffect(() => {
         AuthenticateUser.then((username) => {
-            router.push('/');
-        }).catch((err) => {
+            setUserData({ username: username });
+            setAuthenticated(true);
+        })
+        .catch((err) => {
             console.log(err);
         })
     },[])
@@ -62,19 +65,25 @@ export default function Login() {
             <Head>
                 <title>SimpleBlog - Login</title>
             </Head>
-            <Navigation>
-                <Link href="/">Home</Link>
-                <Link href="/login">Login</Link>
-                <Link href="/register">Register</Link>
-            </Navigation>
-            <div className={styles.outerContainer}>
-                <div className={styles.container}>
-                    <h1 className={styles.subheading}>Login</h1>
-                    <label>Username:</label>
-                    <input type="text" placeholder="username" className={styles.input} onChange={handleUsernameChange} />
-                    <label>Password:</label>
-                    <input type="password" placeholder="password" className={styles.input} onChange={handlePasswordChange} />
-                    <button className={styles.button} onClick={SubmitLogin}>Login</button>
+            <Navigation authenticated={authenticated} />
+            <div className={styles.box}>
+                <div className="container-fluid">
+                    <h2>Login</h2>
+                    <form>
+                        <div className="mb-3">
+                            <label className="form-label">Username</label>
+                            <input type="text" placeholder="username" className="form-control" onChange={handleUsernameChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label className="form-label">Password</label>
+                            <input type="password" placeholder="password" className="form-control" onChange={handlePasswordChange} />
+                            <div id="passwordHelpBlock" className="form-text">
+                                Your password must be 8-20 Characters long.
+                            </div>
+                        </div>
+
+                        <button className="btn btn-primary" onClick={SubmitLogin}>Login</button>
+                    </form>
                     {
                         errorVisible ?
                         <Error close={closeError} message={errorMessage}/>

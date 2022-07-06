@@ -6,13 +6,17 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
+/* a {
   color: inherit;
   text-decoration: underline;
 }
 
 a:hover {
   color: inherit;
+} */
+
+.btn-bd-primary {
+  --bs-btn-color: var(--bs-white);
 }
 
 * {
