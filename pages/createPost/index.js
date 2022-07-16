@@ -1,6 +1,7 @@
 import styles from '../../styles/createPost.module.css';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import Navigation from '../../components/navigation.component';
 import AuthenticateUser from '../../util/authenticate';
@@ -9,7 +10,8 @@ export default function createPost() {
     const [authenticated, setAuthenticated] = useState(false);
     const [bodyText, setBodyText] = useState("");
     const [titleText, setTitleText] = useState("");
-    const [subheadingText, setSubheadingText] = useState("")
+    const [subheadingText, setSubheadingText] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
         AuthenticateUser.then((username) => {
@@ -18,6 +20,7 @@ export default function createPost() {
         })
         .catch((err) => {
             console.log(err);
+            router.push('/login');
         })
     }, [])
 

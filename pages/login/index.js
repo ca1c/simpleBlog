@@ -67,21 +67,19 @@ export default function Login() {
             <div className={styles.box}>
                 <div className="container-fluid">
                     <h2>Login</h2>
-                    <form>
-                        <div className="mb-3">
-                            <label className="form-label">Username</label>
-                            <input type="text" placeholder="username" className="form-control" onChange={handleUsernameChange} />
+                    <div className="mb-3">
+                        <label className="form-label">Username</label>
+                        <input type="text" placeholder="username" className="form-control" onChange={handleUsernameChange} />
+                    </div>
+                    <div className="mb-3">
+                        <label className="form-label">Password</label>
+                        <input type="password" placeholder="password" className="form-control" onChange={handlePasswordChange} />
+                        <div id="passwordHelpBlock" className="form-text">
+                            Your password must be 8-20 Characters long.
                         </div>
-                        <div className="mb-3">
-                            <label className="form-label">Password</label>
-                            <input type="password" placeholder="password" className="form-control" onChange={handlePasswordChange} />
-                            <div id="passwordHelpBlock" className="form-text">
-                                Your password must be 8-20 Characters long.
-                            </div>
-                        </div>
+                    </div>
 
-                        <button className="btn btn-primary" onClick={SubmitLogin}>Login</button>
-                    </form>
+                    <button className="btn btn-primary" onClick={SubmitLogin}>Login</button>
                     {
                         errorVisible ?
                         <Error close={closeError} message={errorMessage}/>
