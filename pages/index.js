@@ -1,10 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/Link'
 import styles from '../styles/Home.module.css'
 import Navigation from '../components/navigation.component';
-import axios from 'axios';
-import Cookies from 'universal-cookie';
 import { useEffect, useState } from 'react';
 import AuthenticateUser from '../util/authenticate';
 
