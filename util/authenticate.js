@@ -8,12 +8,12 @@ const AuthenticateUser = new Promise(async (resolve, reject) => {
         const query = `?sessId=${sessID}`;
         const res = await axios.get(`http://localhost:8080/api/authenticate${query}`);
         if(res.data.success) {
-            resolve(res.data.username);
+            resolve({ success: true, user: res.data.username, message: "user authenticated" });
         }
 
-        reject("not authenticated, user must login");
+        resolve({ success: false, message: "user not authenticated"});
     } catch(error) {
-        reject(error);
+        reject({success: false, message: err });
     }
 })
 

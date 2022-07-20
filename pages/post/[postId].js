@@ -9,9 +9,11 @@ function SinglePost({ data }) {
         <>
             <Navigation />
             <div>
-                <h1>{props.title}</h1>
-                <h4>{props.subheading}</h4>
-                <p>{props.bodyText}</p>
+                <div className="container">
+                    <h1>{props.title}</h1>
+                    <h4>{props.subheading}</h4>
+                    <p>{props.bodyText}</p>
+                </div>
             </div>
         </>
     )
