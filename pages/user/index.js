@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AuthenticateUser from "../../util/authenticate";
 import Navigation from "../../components/navigation.component";
 
-function Dashboard({ userData }) {
-    
+function User() {
     const [authenticated, setAuthenticated] = useState(false);
 
     useEffect(() => {
@@ -14,13 +14,13 @@ function Dashboard({ userData }) {
             setAuthenticated(false);
         })
     },[])
-
+    
     return (
         <>
             <Navigation authenticated={authenticated}/>
-            <h1>You aren't logged in</h1>
+            <h1>User not found.</h1>
         </>
     )
 }
 
-export default Dashboard
+export default User;
