@@ -56,12 +56,12 @@ export default function Register() {
     }
 
     useEffect(() => {
-        AuthenticateUser.then((username) => {
-            setUserData({ username: username });
-            setAuthenticated(true);
+        AuthenticateUser.then((data) => {
+            setAuthenticated(data.success);
         })
         .catch((err) => {
             console.log(err);
+            setAuthenticated(false);
         })
     },[])
 

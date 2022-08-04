@@ -9,8 +9,8 @@ import Navigation from '../../components/navigation.component';
 import AuthenticateUser from '../../util/authenticate';
 
 function EditPost({ data }) {
+    const cookies = new Cookies();
     const props = data;
-    console.log(props);
     const [authenticated, setAuthenticated] = useState(false);
     const [bodyText, setBodyText] = useState(props.bodyText);
     const [titleText, setTitleText] = useState(props.title);
@@ -36,10 +36,8 @@ function EditPost({ data }) {
 
     function submitPost() {
 
-        console.log(user);
-
         const blogPost = {
-            username: user,
+            sessId: cookies.get('sessID'),
             pid: postId,
             title: titleText,
             subheading: subheadingText,
