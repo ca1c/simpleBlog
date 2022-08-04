@@ -10,14 +10,14 @@ export default function Home() {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    AuthenticateUser.then((username) => {
-      setUserData({ username: username });
-      setAuthenticated(true);
+    AuthenticateUser.then((data) => {
+        setAuthenticated(data.success);
     })
     .catch((err) => {
-      console.log(err);
+        console.log(err);
+        setAuthenticated(false);
     })
-  }, [])
+},[])
 
   return (
     <>
